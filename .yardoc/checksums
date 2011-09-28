@@ -1,0 +1,5 @@
+lib/squirm.rb 7f134614f218cfc6145b3da7582a10bd368eb493
+lib/squirm/pool.rb 4c1aab4559a9b258a6e59a70b72905fb353f1f39
+lib/squirm/core.rb 0ca45af460998b99833b5b788b2c8c3de150e988
+lib/squirm/version.rb b54bd7be2728a332099aa36cd30b6a601685fb0c
+lib/squirm/procedure.rb fa85a5a0efb2c7f780e1d7f816a6d51d0786c05e
