@@ -6,7 +6,8 @@ if ENV["COVERAGE"]
 end
 
 $:.unshift File.expand_path("../../lib", __FILE__)
-
+require "rubygems"
+gem "minitest"
 require "minitest/spec"
 require 'minitest/autorun'
 require 'pg'
