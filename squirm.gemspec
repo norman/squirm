@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = ">= 1.9"
 
-  s.add_development_dependency "minitest"
-  s.add_runtime_dependency "pg"
+  s.add_development_dependency "minitest", ">= 2.6"
+  s.add_runtime_dependency "pg", ">= 0.11.0"
 
 end
