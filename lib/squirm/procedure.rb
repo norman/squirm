@@ -39,6 +39,7 @@ module Squirm
     class NotFound < RuntimeError
     end
 
+    # The SQL query used to load meta info about the procedure.
     INFO_SQL = Pathname(__FILE__).dirname.join("procedure.sql").read
 
     # Creates a new stored procedure.
@@ -70,6 +71,7 @@ module Squirm
       INFO_SQL
     end
 
+    # Invokes the procedure.
     def call(*args, &block)
       Squirm.exec query, arguments.format(*args) do |result|
         if block_given?

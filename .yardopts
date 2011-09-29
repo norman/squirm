@@ -1,3 +1,4 @@
 --files=*.md
 --protected
 --list-undoc
+--exclude lib/squirm/version
