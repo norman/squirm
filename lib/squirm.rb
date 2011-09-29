@@ -8,19 +8,19 @@ take full advantage of the advanced functionality offered by Postgres. With
 Squirm, you write your entire database layer using the tools of the domain
 experts: SQL and stored procedures. Muahahahahaha!
 
-## Using it
+== Using it
 
 First of all you should know that this is experimental, and in-progress. So you
 might want to exercise lots of caution. Don't build your mission critical app on
 top of Squirm now, or possibly ever.
 
-### Getting a connection
+=== Getting a connection
 
 Squirm comes with a very simple, threadsafe connection pool.
 
     Squirm.connect :dbname => "postgres", :pool_size => 5, :timeout => 5
 
-### Performing queries
+=== Performing queries
 
 The `Squirm.use` method will check out a connection and yield it to the block
 you pass. The connection is a vanilla instance of PGConn, so all of Postgres's
@@ -45,7 +45,7 @@ checked out connection as a thread local variable, so that calls to Squirm.exec
 inside the block will use the same connection. It will wait for the thread to
 return and then return the block's return value.
 
-### Accessing a stored procedure
+=== Accessing a stored procedure
 
 Accessing an API you create is simple:
 
