@@ -3,7 +3,7 @@ require "set"
 
 module Squirm
 
-  # A ridiculously simple connection pool.
+  # A ridiculously simple object pool.
   class Pool
     include Enumerable
 
