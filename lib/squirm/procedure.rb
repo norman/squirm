@@ -1,4 +1,3 @@
-require "forwardable"
 require "pathname"
 
 module Squirm

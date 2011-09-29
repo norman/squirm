@@ -1,3 +1,4 @@
+require "forwardable"
 require "monitor"
 require "set"
 
@@ -5,10 +6,13 @@ module Squirm
 
   # A ridiculously simple object pool.
   class Pool
+    extend Forwardable
     include Enumerable
 
     attr_reader :connections
     attr_accessor :timeout
+
+    def_delegator :@mutex, :synchronize
 
     def initialize(timeout=5)
       @mutex       = Monitor.new
@@ -18,6 +22,7 @@ module Squirm
       @connections = Set.new
     end
 
+    # Synchronizes iterations provided by Enumerable.
     def each(&block)
       synchronize { @connections.each(&block) }
     end
@@ -38,10 +43,6 @@ module Squirm
         @queue.push conn
         @condition.signal
       end
-    end
-
-    def synchronize(&block)
-      @mutex.synchronize { yield }
     end
   end
 end
