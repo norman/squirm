@@ -18,7 +18,7 @@ top of Squirm now, or possibly ever.
 
 Squirm comes with a very simple, threadsafe connection pool.
 
-    Squirm.connect :dbname => "postgres", :pool_size => 5, :timeout => 5
+    Squirm.connect dbname: "postgres", pool_size: 5, timeout: 5
 
 === Performing queries
 
