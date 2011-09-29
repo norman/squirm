@@ -208,7 +208,8 @@ module Squirm
           type ||= arg
           arg   = arg.gsub(/\s+/, '_').gsub(/\A_/, '')
           count = hash.keys.count {|elem| elem =~ /#{arg}[\d]?/}
-          hash[count == 0 ? arg : arg + count.next.to_s] = type
+          key = count == 0 ? arg : arg + count.next.to_s
+          hash[key.to_sym] = type
         end
         hash
       end

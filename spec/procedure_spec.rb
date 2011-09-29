@@ -9,21 +9,21 @@ describe Squirm::Procedure::Arguments do
 
   it "should number duplicate names" do
     args = Squirm::Procedure::Arguments.new("text, text, text")
-    assert_equal "text", args[0]
-    assert_equal "text2", args[1]
-    assert_equal "text3", args[2]
+    assert_equal :text, args[0]
+    assert_equal :text2, args[1]
+    assert_equal :text3, args[2]
   end
 
   it "should detect named args" do
     args = Squirm::Procedure::Arguments.new("hello text, world text")
-    assert_equal "hello", args[0]
-    assert_equal "world", args[1]
+    assert_equal :hello, args[0]
+    assert_equal :world, args[1]
   end
 
   it "should remove leading underscores from arg names" do
     args = Squirm::Procedure::Arguments.new("_hello text, _world text")
-    assert_equal "hello", args[0]
-    assert_equal "world", args[1]
+    assert_equal :hello, args[0]
+    assert_equal :world, args[1]
   end
 
   describe "#to_params" do
@@ -71,7 +71,7 @@ describe Squirm::Procedure do
       Squirm.connect $squirm_test_connection
       proc = Squirm::Procedure.new("regexp_matches", :args => "text, text",
                                     :schema => "pg_catalog").load
-      assert_equal ["text", "text2"], proc.arguments.to_a
+      assert_equal [:text, :text2], proc.arguments.to_a
     end
 
     it "should raise an exception if no function is found" do
