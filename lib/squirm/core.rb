@@ -80,7 +80,7 @@ module Squirm
     # Quotes an SQL identifier.
     # @return [String] The identifier.
     def quote_ident(*args)
-      PGconn.quote_ident(*args)
+      PGconn.quote_ident(*args.map(&:to_s))
     end
   end
 end
