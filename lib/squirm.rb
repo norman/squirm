@@ -59,7 +59,15 @@ some reason you want to use them:
     proc.call("Jan 1, 2011") #=> "2011-01-01"
 
 =end
+
+
 module Squirm
   Rollback, Timeout = 2.times.map { Class.new RuntimeError }
   extend Core
+end
+
+module Kernel
+  def Squirm(&block)
+    Squirm.instance_eval(&block)
+  end
 end
