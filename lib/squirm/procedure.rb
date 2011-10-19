@@ -49,6 +49,11 @@ module Squirm
       @arguments = Arguments.new(options[:args]) if options[:args]
     end
 
+    # Creates procedure and loads it right away.
+    def self.load(*args)
+      new(*args).load
+    end
+
     # Loads meta info about the stored procedure.
     #
     # This action is not performed in the constructor to allow instances to
