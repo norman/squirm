@@ -64,8 +64,10 @@ module Squirm
     end
 
     # Rolls back from inside a #transaction block.
-    def rollback
-      raise Rollback
+    # When called with block, performs a transaction inside a block and rolls
+    # back when it gets to the end. This can be useful in tests.
+    def rollback(&block)
+      block_given? ? transaction {yield; rollback} : (raise Rollback)
     end
 
     # Checks out a connection and uses it for all database access inside the
