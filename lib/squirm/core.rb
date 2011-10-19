@@ -40,6 +40,10 @@ module Squirm
       end
     end
 
+    def procedure(*args)
+      Procedure.load(*args)
+    end
+
     # Gets the connection pool.
     # @return [Squirm::Pool] The connection pool.
     def pool
