@@ -91,6 +91,11 @@ module Squirm
 
     alias [] call
 
+    # Gets a Ruby proc that calls this procedure.
+    def to_proc
+      ->(*args) {call(*args)}
+    end
+
     # Checks the number of values returned when looking up meta info about
     # the procedure.
     # @see #load
