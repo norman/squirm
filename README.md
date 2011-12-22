@@ -42,13 +42,17 @@ Here's a quick demo of how you might use it:
     id = create.call(email: "johndoe@example.com", name: "John Doe")
 
 In and of itself, Squirm offers very little, but is meant to be a basic building
-block for other libraries.
+block for other libraries, such as [Squirm
+Model](https://github.com/bvision/squirm_model), which supplies an Active Model
+compatible ORM based on stored procedures.
 
-One such library is Squirm Model, which is currently under development.
+## Using it with Rails
 
-This library will offer an ActiveModel-compatible, ORM-like library that uses
-stored procedures and SQL rather than generating the SQL for you. Stay tuned
-for more details.
+Squirm can use Active Record's connection pool rather than its own, all you have
+to do is pass in the pool to `Squirm.connect`:
+
+    # in config/initializers/squirm.rb
+    Squirm.connect pool: ActiveRecord::Base.connection_pool
 
 ## Author
 

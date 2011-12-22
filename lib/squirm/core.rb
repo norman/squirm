@@ -76,7 +76,7 @@ module Squirm
       conn = @pool.checkout
       begin
         Thread.current[:squirm_connection] = conn
-        yield conn
+        yield conn.respond_to?(:raw_connection) ? conn.raw_connection : conn
       ensure
         Thread.current[:squirm_connection] = nil
         @pool.checkin conn
