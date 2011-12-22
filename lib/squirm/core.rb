@@ -34,7 +34,8 @@ module Squirm
     # Executes the query and passes the result to the block you specify.
     def exec(*args, &block)
       if current = Thread.current[:squirm_connection]
-        current.exec(*args, &block)
+        conn = current.respond_to?(:raw_connection) ? current.raw_connection : current
+        conn.exec(*args, &block)
       else
         use {|conn| conn.exec(*args, &block)}
       end
