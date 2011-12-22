@@ -71,16 +71,18 @@ module Squirm
       block_given? ? transaction {yield; rollback} : (raise Rollback)
     end
 
-    # Checks out a connection and uses it for all database access inside the
-    # block.
-    def use
-      conn = @pool.checkout
+    # Uses a connection for all database access inside the given block. If no
+    # connection is given, then one will be checked out from the pool for use
+    # inside the block, and then checked back in when the method returns.
+    def use(conn = nil)
+      conn_given = !!conn
+      conn = conn_given ? conn : @pool.checkout
       begin
         Thread.current[:squirm_connection] = conn
         yield conn.respond_to?(:raw_connection) ? conn.raw_connection : conn
       ensure
         Thread.current[:squirm_connection] = nil
-        @pool.checkin conn
+        @pool.checkin conn unless conn_given
       end
     end
 
