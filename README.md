@@ -48,11 +48,16 @@ compatible ORM based on stored procedures.
 
 ## Using it with Rails
 
-Squirm can use Active Record's connection pool rather than its own, all you have
-to do is pass in the pool to `Squirm.connect`:
+Squirm comes with built-in support to make it work seamlessly with Active Record:
 
-    # in config/initializers/squirm.rb
-    Squirm.connect pool: ActiveRecord::Base.connection_pool
+    class Person < ActiveRecord::Base
+      procedure :say_hello
+    end
+    
+    p = Person.find(23)
+    p.say_hello
+
+More documentation coming soon.
 
 ## Author
 
