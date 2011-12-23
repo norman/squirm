@@ -71,3 +71,5 @@ module Kernel
     Squirm.instance_eval(&block)
   end
 end
+
+require "squirm/rails" if defined? Rails
