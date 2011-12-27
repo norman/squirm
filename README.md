@@ -46,19 +46,6 @@ block for other libraries, such as [Squirm
 Model](https://github.com/bvision/squirm_model), which supplies an Active Model
 compatible ORM based on stored procedures.
 
-## Using it with Rails
-
-Squirm comes with built-in support to make it work seamlessly with Active Record:
-
-    class Person < ActiveRecord::Base
-      procedure :say_hello
-    end
-    
-    p = Person.find(23)
-    p.say_hello
-
-More documentation coming soon.
-
 ## Author
 
 Norman Clarke <nclarke@bvision.com>

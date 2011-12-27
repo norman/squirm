@@ -34,8 +34,7 @@ module Squirm
     # Executes the query and passes the result to the block you specify.
     def exec(*args, &block)
       if current = Thread.current[:squirm_connection]
-        conn = current.respond_to?(:raw_connection) ? current.raw_connection : current
-        conn.exec(*args, &block)
+        current.exec(*args, &block)
       else
         use {|conn| conn.exec(*args, &block)}
       end
@@ -75,11 +74,10 @@ module Squirm
     # connection is given, then one will be checked out from the pool for use
     # inside the block, and then checked back in when the method returns.
     def use(conn = nil)
-      conn_given = !!conn
+      conn_given = conn != nil
       conn = conn_given ? conn : @pool.checkout
       begin
-        Thread.current[:squirm_connection] = conn
-        yield conn.respond_to?(:raw_connection) ? conn.raw_connection : conn
+        yield Thread.current[:squirm_connection] = conn
       ensure
         Thread.current[:squirm_connection] = nil
         @pool.checkin conn unless conn_given
