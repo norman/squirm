@@ -1,6 +1,7 @@
 require "squirm/core"
 require "squirm/pool"
 require "squirm/procedure"
+require "squirm/executor"
 
 =begin
 Squirm is an experimental anti-ORM for database-loving programmers who want to
@@ -68,7 +69,7 @@ end
 
 module Kernel
   def Squirm(&block)
-    Squirm.instance_eval(&block)
+    Squirm::Executor.eval(&block)
   end
 end
 
