@@ -42,7 +42,8 @@ Here's a quick demo of how you might use it:
     id = create.call(email: "johndoe@example.com", name: "John Doe")
 
 In and of itself, Squirm offers very little, but is meant to be a basic building
-block for other libraries, such as [Squirm
+block for other libraries, such as [Squirm Rails](https://github.com/bvision/squirm_rails),
+which adds stored procedure support to Active Record, or [Squirm
 Model](https://github.com/bvision/squirm_model), which supplies an Active Model
 compatible ORM based on stored procedures.
 
