@@ -6,6 +6,8 @@ module Squirm
   # The core DSL used by Squirm.
   module Core
 
+    attr :pool
+
     # Establishes a connection pool.
     # @param [Hash] options The connection options
     # @option options [String] :pool Use the given pool rather than Squirm's.
@@ -42,12 +44,6 @@ module Squirm
 
     def procedure(*args)
       Procedure.load(*args)
-    end
-
-    # Gets the connection pool.
-    # @return [Squirm::Pool] The connection pool.
-    def pool
-      @pool if defined? @pool
     end
 
     # Performs a #use inside a transaction.
