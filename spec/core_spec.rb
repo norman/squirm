@@ -10,6 +10,26 @@ describe Squirm do
     assert_equal '"table"', Squirm.quote_ident("table")
   end
 
+  it "should be a module" do
+    assert Squirm.is_a? Module
+  end
+
+  it "should evaluate a block inside an Executor instance" do
+    assert_raises RuntimeError do
+      Squirm do
+        raise "SUCCESS" if self.class == Squirm::Executor
+      end
+    end
+  end
+
+  describe "#procedure" do
+    it "should get a procedure instance and load it" do
+      Squirm.connect $squirm_test_connection
+      proc = Squirm.procedure "date", args: "abstime", schema: "pg_catalog"
+      assert proc.kind_of? Squirm::Procedure
+    end
+  end
+
   describe "#connect" do
     it "should use a pool if given" do
       pool = OpenStruct.new

@@ -93,9 +93,18 @@ describe Squirm::Procedure do
     end
 
     it "should load an overloaded functions if instance was initialized with :args" do
-      assert Squirm::Procedure.new("date", :args => "abstime", :schema => "pg_catalog").load
+      assert Squirm::Procedure.new("date", args: "abstime", schema: "pg_catalog").load
     end
 
+  end
+
+  describe "#to_proc" do
+    before {Squirm.connect $squirm_test_connection}
+
+    it "should return a proc which calls the procedure" do
+      proc = Squirm::Procedure.new("date", args: "abstime", schema: "pg_catalog").load.to_proc
+      proc.call("Jan 1, 2011") {|result| assert_instance_of PGresult, result}
+    end
   end
 
   describe "#call" do
@@ -103,14 +112,12 @@ describe Squirm::Procedure do
     before {Squirm.connect $squirm_test_connection}
 
     it "should yield the result to a block if given" do
-      proc = Squirm::Procedure.new("date", :args => "abstime", :schema => "pg_catalog").load
-      proc.call("Jan 1, 2011") do |result|
-        assert_instance_of PGresult, result
-      end
+      proc = Squirm::Procedure.new("date", args: "abstime", schema: "pg_catalog").load
+      proc.call("Jan 1, 2011") {|result| assert_instance_of PGresult, result}
     end
 
     it "should return the value of a single-row result" do
-      proc = Squirm::Procedure.new("date", :args => "abstime", :schema => "pg_catalog").load
+      proc = Squirm::Procedure.new("date", args: "abstime", schema: "pg_catalog").load
       assert_equal "2011-01-01", proc.call("Jan 1, 2011")
     end
 
