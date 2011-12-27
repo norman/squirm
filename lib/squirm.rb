@@ -72,5 +72,3 @@ module Kernel
     Squirm::Executor.eval(&block)
   end
 end
-
-require "squirm/rails" if defined? Rails
