@@ -163,14 +163,14 @@ module Squirm
         @hash   = self.class.hashify(string)
       end
 
-      # Formats arguments used to call the stored procedure.
+      # Formats the arguments used to call the stored procedure.
       #
-      # When given a anything other than a hash, the arguments are returned
+      # When given anything other than a hash, the arguments are returned
       # without modification.
       #
-      # When given a hash, the return value is an array or arguments in the
+      # When given a hash, the return value is an array of arguments in the
       # order needed when calling the procedure. Missing values are replaced by
-      # nil.
+      # +nil+.
       #
       # @example
       #   # Assume a stored procedure with a definition like the following:
