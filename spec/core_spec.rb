@@ -53,6 +53,13 @@ describe Squirm do
       end
       assert_nil Thread.current[:squirm_connection]
     end
+
+    it "should use connection if given as an argument" do
+      mock = Object.new
+      Squirm.use(mock) do |conn|
+        assert mock == conn
+      end
+    end
   end
 
   describe "#exec" do

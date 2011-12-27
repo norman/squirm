@@ -74,7 +74,7 @@ module Squirm
     # connection is given, then one will be checked out from the pool for use
     # inside the block, and then checked back in when the method returns.
     def use(conn = nil)
-      conn_given = conn != nil
+      conn_given = !!conn
       conn = conn_given ? conn : @pool.checkout
       begin
         yield Thread.current[:squirm_connection] = conn
